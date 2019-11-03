@@ -33,6 +33,9 @@
     </Interpreter>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BacktesterService.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BinanceService.py">
       <SubType>Code</SubType>
     </Compile>
