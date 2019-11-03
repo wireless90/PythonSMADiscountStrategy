@@ -33,6 +33,10 @@
     </Interpreter>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinanceService.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CandleStickService.py" />
     <Compile Include="CredentialService.py">
       <SubType>Code</SubType>
     </Compile>
