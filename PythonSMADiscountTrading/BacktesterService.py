@@ -23,12 +23,15 @@ class BacktesterService:
         self.cursor = 0
         self.sma = 0.0;
         self.trades = []
+        self.buy_1_allowed = True
+        self.buy_2_allowed = True
 
     def start(self): 
         while self.sma != -1:
             sma = self.__compute_sma()
 
             # Code here
+
 
             self.cursor += 1
 
