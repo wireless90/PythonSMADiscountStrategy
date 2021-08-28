@@ -19,6 +19,24 @@ class BacktesterService:
         self.profit_target = (1 + profit_target) / 100
         self.stop_loss = (1 - stop_loss) / 100
         self.stop_loss_threshold = stop_loss_threshold
+        self.cursor = 0
+    
+    def start(self): 
+        if self.__has_enough_candlesticks() == False:
+            return 0
 
+        while self.cursor < len(self.candlesticks):
+            sma = self.__compute_sma()
+            self.cursor += 1
+
+
+    pass
+
+    # private functions
+
+    def __has_enough_candlesticks(self):
+        return len(self.candlesticks) > BacktesterService.SMA_PERIOD
     
-    
+
+    def __compute_sma(self):
+        sum([candlestick.close for candlestick in self.candlesticks]) / BacktesterService.SMA_PERIOD
