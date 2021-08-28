@@ -13,7 +13,7 @@ class BacktesterService:
     BUY_TARGET_2 = 5
     PROFIT_TARGET_2 = 5
 
-    def __init__(self, candlesticks, sma_period=BacktesterService.SMA_PERIOD, buy_target_1=BacktesterService.BUY_TARGET_1, buy_target_2=BacktesterService.BUY_TARGET_2, profit_target_1=BacktesterService.PROFIT_TARGET_1, profit_target_2=BacktesterService.PROFIT_TARGET_2):
+    def __init__(self, candlesticks, sma_period=SMA_PERIOD, buy_target_1=BUY_TARGET_1, buy_target_2=BUY_TARGET_2, profit_target_1=PROFIT_TARGET_1, profit_target_2=PROFIT_TARGET_2):
         self.candlesticks = candlesticks
         self.sma_period = sma_period
         self.buy_target_1 = (1 - buy_target_1) / 100
@@ -28,8 +28,8 @@ class BacktesterService:
 
     def start(self): 
         while self.sma != -1:
-            sma = self.__compute_sma()
-
+            self.__compute_sma()
+            print(self.sma)
             # Code here
 
 
@@ -41,13 +41,15 @@ class BacktesterService:
     # private functions
 
     def __has_enough_candlesticks(self):
-        candlesticks_left = len(self.candlesticks) - cursor
+        candlesticks_left = len(self.candlesticks) - self.cursor
         return candlesticks_left > self.sma_period
     
 
     def __compute_sma(self):
-        if __has_enough_candlesticks() == False:
-            return -1;
+        if self.__has_enough_candlesticks() == False:
+            self.sma = -1
+            return self.sma;
 
         candlesticks = self.candlesticks[self.cursor:(self.cursor+self.sma_period)]
-        self.sma = sum([candlestick.close for candlestick in candlesticks]) / self.sma_period
+        computed_sum = sum([candlestick.close for candlestick in candlesticks])
+        self.sma = computed_sum / self.sma_period
