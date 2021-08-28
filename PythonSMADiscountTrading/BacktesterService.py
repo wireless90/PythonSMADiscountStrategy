@@ -6,21 +6,19 @@ class BacktesterService:
     SMA_PERIOD = 100
     #% of profit from buy target
     PROFIT_TARGET = 10
-    #% below buy target to consider for loss
-    STOP_LOSS = 10
+
     #%below sma
     BUY_TARGET_1 = 2.5
+    PROFIT_TARGET_1 = 2.5
     BUY_TARGET_2 = 5
-    STOP_LOSS_THRESHOLD = 0
+    PROFIT_TARGET_2 = 5
 
-    def __init__(self, candlesticks, sma_period=BacktesterService.SMA_PERIOD, buy_target_1=BacktesterService.BUY_TARGET_1, buy_target_2=BacktesterService.BUY_TARGET_2, profit_target=BacktesterService.PROFIT_TARGET, stop_loss=BacktesterService.STOP_LOSS, stop_loss_threshold=BacktesterService.STOP_LOSS_THRESHOLD):
-        self.candlesticks = candlesticks
+    def __init__(self, candlesticks, sma_period=BacktesterService.SMA_PERIOD, buy_target_1=BacktesterService.BUY_TARGET_1, buy_target_2=BacktesterService.BUY_TARGET_2, profit_target_1=BacktesterService.PROFIT_TARGET_1, profit_target_2=BacktesterService.PROFIT_TARGET_2):
         self.sma_period = sma_period
         self.buy_target_1 = (1 - buy_target_1) / 100
         self.buy_target_2 = (1 - buy_target_2) / 100
-        self.profit_target = (1 + profit_target) / 100
-        self.stop_loss = (1 - stop_loss) / 100
-        self.stop_loss_threshold = stop_loss_threshold
+        self.profit_target_1 = (1 + profit_target_1) / 100
+        self.profit_target_2 = (1 + profit_target_2) / 100
         self.cursor = 0
     
     def start(self): 
@@ -37,7 +35,7 @@ class BacktesterService:
     # private functions
 
     def __has_enough_candlesticks(self):
-        return len(self.candlesticks) > BacktesterService.SMA_PERIOD
+        return len(self.candlesticks) > self.sma_period
     
 
     def __compute_sma(self):
