@@ -22,7 +22,8 @@ class BacktesterService:
         self.profit_target_2 = (1 + profit_target_2) / 100
         self.cursor = 0
         self.sma = 0.0;
-    
+        self.trades = []
+
     def start(self): 
         while self.sma != -1:
             sma = self.__compute_sma()
